@@ -829,6 +829,11 @@ this license.
           // TODO: add/update description for element
           if (!checkForDescription(descriptionId)) {
             segments = descriptionData.segments.map(segmentId => { return {id: segmentId}; });
+            this._getData(
+              'feedback/forDescription/' + descriptionId, 
+              (data) => alert(JSON.stringify(data))
+            );
+
             descriptionItem = {id: descriptionId, segments: segments};
             descriptions.push(descriptionItem);
           }
@@ -841,6 +846,7 @@ this license.
           // load top rated description variation
           if (!onServerResponse || onServerResponse()) {
             this._getData('descriptions/forElement/' + item.id, onDescriptionLoaded, 'rating', false, null, 1);
+              // ok i have description. now to get feedback/forDescription/ + descriptionId
           }
         } else if (!checkForDescription(descriptionId)) {
           // load description variation with provided ID
