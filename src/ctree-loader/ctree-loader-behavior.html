@@ -831,11 +831,16 @@ this license.
             segments = descriptionData.segments.map(segmentId => { return {id: segmentId}; });
             this._getData(
               'feedback/forDescription/' + descriptionId, 
-              (data) => alert(JSON.stringify(data))
+              (data) => {
+                descriptionItem = {
+                  id: descriptionId,
+                  segments: segments,
+                  feedback: data
+                };
+                descriptions.push(descriptionItem);
+              }
             );
 
-            descriptionItem = {id: descriptionId, segments: segments};
-            descriptions.push(descriptionItem);
           }
           if (!onServerResponse || onServerResponse()) {
             loadSegments();
